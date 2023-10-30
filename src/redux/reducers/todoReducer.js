@@ -18,13 +18,13 @@ export const getInitialState = createAsyncThunk("todo/getInitialState",
     //     console.log(err);
     // }
     ()=>{
-        return axios.get("http://localhost:4100/api/todos");
+        return axios.get("http://todo-jfkg.onrender.com/api/todos");
     }
     );
 
     export const addTodoAsync = createAsyncThunk("todo/addTodo", async (payload) => {
         try {
-          const response = await axios.post("http://localhost:4100/api/todos/", {
+          const response = await axios.post("http://todo-jfkg.onrender.com/api/todos/", {
           id: Math.random(), 
           text: payload,
             completed: false,
