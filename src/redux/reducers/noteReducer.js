@@ -7,7 +7,7 @@ const initialState = {
 
 export const getInitialState = createAsyncThunk("notes/getInitialState", async () => {
   try {
-    const response = await axios.get("http://localhost:4100/api/notes");
+    const response = await axios.get("http://todo-jfkg.onrender.com/api/notes");
     return response.data;
   } catch (error) {
     throw error;
@@ -16,7 +16,7 @@ export const getInitialState = createAsyncThunk("notes/getInitialState", async (
 
 export const addnoteAsync = createAsyncThunk("notes/addnote", async (payload) => {
   try {
-    const response = await axios.post("http://localhost:4100/api/notes/", {
+    const response = await axios.post("http://todo-jfkg.onrender.com/api/notes/", {
       id: Math.random(),
       text: payload,
       createdOn: new Date().toDateString(),
@@ -30,7 +30,7 @@ export const addnoteAsync = createAsyncThunk("notes/addnote", async (payload) =>
 });
 export const deletenoteAsync = createAsyncThunk("notes/deleteNotes", async (noteId) => {
     try {
-        const response = await axios.delete(`http://localhost:4100/api/notes/${noteId}`);
+        const response = await axios.delete(`http://todo-jfkg.onrender.com/api/notes/${noteId}`);
         return response.data;
     } catch (error) {
        console.log(error)
