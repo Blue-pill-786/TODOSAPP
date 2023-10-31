@@ -32,6 +32,7 @@ function NoteForm() {
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
         />
+        {console.log(noteText)}
         <button className="btn btn-success float-end" type="submit">Create Note</button>
       </form>
     </div>

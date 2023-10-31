@@ -18,18 +18,18 @@ export const getInitialState = createAsyncThunk("todo/getInitialState",
     //     console.log(err);
     // }
     ()=>{
-        return axios.get("http://todo-jfkg.onrender.com/api/todos");
+        return axios.get("https://todo-jfkg.onrender.com/api/todos");
     }
     );
 
     export const addTodoAsync = createAsyncThunk("todo/addTodo", async (payload) => {
         try {
-          const response = await axios.post("http://todo-jfkg.onrender.com/api/todos/", {
+          const response = await axios.post("https://todo-jfkg.onrender.com/api/todos/", {
           id: Math.random(), 
           text: payload,
             completed: false,
           });
-        //   console.log("response data",response.data)
+          console.log("response data",response.data)
       
           return response.data; // Access response data directly
         } catch (error) {

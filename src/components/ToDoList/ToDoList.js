@@ -16,18 +16,6 @@ function ToDoList() {
 
   useEffect(() => {
     dispatch(getInitialState());
-      // fetch("http://localhost:4100/api/todos")
-      //   .then(res=>res.json())
-      //     .then(parsedJson=>{
-      //       console.log(parsedJson);
-      //     })
-      // axios.get("http://localhost:4100/api/todos")
-      //   .then(res=>
-      //       {
-      //         console.log(res.data);
-      //         dispatch(actions.setInitialState(res.data));
-      //       }
-      //     );
       
   }, [dispatch]);
 
@@ -36,13 +24,12 @@ function ToDoList() {
     <div className={styles.container}>
     <ul>
       {todos.map((todo,index) => (
-        <li className={styles.item} key={todo.text}>
+        <li className={styles.item} key={index}>
        
           <span className={styles.content}>{todo.text}</span>
           <span className={todo.completed ? styles.completed:styles.pending}>{todo.completed ? 'Completed': 'Pending'}</span>
           <button className="btn btn-warning"
           onClick={()=>{
-            // console.log("[LOG]: Todo - TOGGLE Action dispatched");
             dispatch(actions.toggle(index))}}
           >Toggle</button>
           </li>
