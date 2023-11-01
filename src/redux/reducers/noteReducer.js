@@ -19,11 +19,11 @@ export const addnoteAsync = createAsyncThunk("notes/addnote", async (payload) =>
     const response = await axios.post("https://todo-jfkg.onrender.com/api/notes/", {
       id: Math.random(),
       text: payload,
-    
       createdOn: new Date().toDateString(),
       
     });
-    console.log(response.data);
+   
+    console.log("RESPONSE", response)
     return response.data;
   } catch (error) {
    console.log("Notes error",error);

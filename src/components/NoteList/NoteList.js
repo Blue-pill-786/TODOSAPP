@@ -25,7 +25,7 @@ function NoteList() {
       {notes.map((note,index) => (
         <li className={styles.item} key={note.id}>
             {/* <p>{note.createdOn.toLocaleDateString()}</p> */}
-            {console.log(note.text)}
+            {console.log("Line 26",note.text)}
             <p className={styles.notecontent}>{note.text}</p>
            
             <button className={"btn btn-danger "+styles.button}

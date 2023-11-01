@@ -14,7 +14,7 @@ function NoteForm() {
   // Define a function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log(noteText)
     // Dispatch an asynchronous action to add a note with the provided text
     dispatch(addnoteAsync(noteText));
     
