@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit")
+
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState={
     todos:[
@@ -9,14 +10,6 @@ const initialState={
 }
 
 export const getInitialState = createAsyncThunk("todo/getInitialState", 
-    // async (_,thunkAPI)=>{
-    // // async calls.
-    // try{
-    //     const res = await axios.get("http://localhost:4100/api/todos")
-    //     thunkAPI.dispatch(actions.setInitialState(res.data));
-    // }catch(err){
-    //     console.log(err);
-    // }
     ()=>{
         return axios.get("https://todo-jfkg.onrender.com/api/todos");
     }
@@ -25,9 +18,11 @@ export const getInitialState = createAsyncThunk("todo/getInitialState",
     export const addTodoAsync = createAsyncThunk("todo/addTodo", async (payload) => {
         try {
           const response = await axios.post("https://todo-jfkg.onrender.com/api/todos/", {
+           
+              text: payload,
           id: Math.random(), 
-          text: payload,
             completed: false,
+
           });
           console.log("response data",response.data)
       
