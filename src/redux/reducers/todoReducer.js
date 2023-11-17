@@ -1,4 +1,4 @@
-import axios from "axios";
+import customAxios from "../../customAxios";
 
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -9,28 +9,38 @@ const initialState={
     ]
 }
 
-export const getInitialState = createAsyncThunk("todo/getInitialState", 
-    ()=>{
-        return axios.get("https://todo-jfkg.onrender.com/api/todos");
+export const getInitialState = createAsyncThunk('todo/getInitialState', async () => {
+    try {
+      const response = await customAxios.get('/api/todos'); // Use the custom Axios instance
+      return response.data;
+    } catch (error) {
+      console.log('axios error', error);
+      throw error; // Re-throw the error for error handling in components
     }
-    );
+  });
+
+  
+  
+  
+  
+  
 
     export const addTodoAsync = createAsyncThunk("todo/addTodo", async (payload) => {
         try {
-          const response = await axios.post("https://todo-jfkg.onrender.com/api/todos/", {
-           
-              text: payload,
-          id: Math.random(), 
-            completed: false,
-
-          });
-          console.log("response data",response.data)
-      
+            const response = await customAxios.post("https://todo-jfkg.onrender.com/api/todos/", {
+                
+                text: payload,
+                id: Math.random(), 
+                completed: false,
+                
+            });
+            
+            // console.log("response data",response.data)
           return response.data; // Access response data directly
         } catch (error) {
-         console.log("axios error",error)
+            console.log("axios error",error)
         }
-      });
+    });
 
 
 // Creating Reducer using Redux Toolkit
@@ -45,7 +55,8 @@ const todoSlice = createSlice({
             console.log("add action")
                 state.todos.push({
                     text:action.payload,
-                    completed: false
+                    completed: false,
+                    id: Math.random()
                 })
         },
         toggle:(state, action)=>{
@@ -60,13 +71,17 @@ const todoSlice = createSlice({
     extraReducers:(builder)=>{
         builder
         .addCase(getInitialState.fulfilled, (state, action)=>{
-            // console.log(action.payload);
-            state.todos=[...action.payload.data]
-        })
+            if (Array.isArray(action.payload)) {
+                state.todos = [...action.payload];
+            } else {
+                console.error("Data is not an array");
+                // console.log("action payload",action.payload)
+            }})
         .addCase(addTodoAsync.fulfilled, (state, action)=>{
             
         
             state.todos.push(action.payload);
+            console.log("action payload", action.payload)
         })
     }
 });
