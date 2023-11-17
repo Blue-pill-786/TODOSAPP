@@ -11,7 +11,7 @@ const initialState={
 
 export const getInitialState = createAsyncThunk('todo/getInitialState', async () => {
     try {
-      const response = await customAxios.get('/api/todos'); // Use the custom Axios instance
+      const response = await customAxios.get('https://todo-jfkg.onrender.com/api/todos'); // Use the custom Axios instance
       return response.data;
     } catch (error) {
       console.log('axios error', error);
