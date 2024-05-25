@@ -20,18 +20,18 @@ function App() {
           <Route path="" element={<Home />}>
             
           </Route>
-          <Route path="todo"
+          <Route path="/todo"
           element={
             <Fragment>
               <NavBar />
-             <h1>To Dos</h1>
+             <h1>To-Do's</h1>
               <TodoForm  />
               <TodoList />
             </Fragment>
           }>
 
           </Route>
-          <Route path="notes"
+          <Route path="/notes"
           element={
             <Fragment>
                <NavBar />
