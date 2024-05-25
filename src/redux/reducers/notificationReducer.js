@@ -1,38 +1,27 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {actions} from './todoReducer'
+import { createSlice } from '@reduxjs/toolkit';
+import { add } from './todoReducer'; // Import the specific action you need
 
-const initialState={
-    message:""
-}
+const initialState = {
+  message: ""
+};
 
 const notificationSlice = createSlice({
-    name:'notification',
-    initialState,
-    reducers:{
-        reset: (state, action)=>{
-            state.message="";
-        }
-    },
-    // extraReducers:{
-    //     "todo/add":(state, action)=>{
-    //       state.message="Todo is created";  
-    //     }
-    // }
-    // extraReducers:(builder)=>{
-    //     builder.addCase(actions.add, (state, action)=>{
-    //         state.message="Todo is created";
-    //     })
-    // }
-    extraReducers:{
-        // map objects: [key]: value
-        [actions.add]: (state, action)=>{
-            state.message="Todo is created";
-        }
+  name: 'notification',
+  initialState,
+  reducers: {
+    reset: (state) => {
+      state.message = "";
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(add, (state) => {
+      state.message = "Todo is created";
+    });
+  }
 });
 
 export const notificationReducer = notificationSlice.reducer;
 
 export const resetNotification = notificationSlice.actions.reset;
 
-export const notificationSelector = (state)=>state.notificationReducer.message;
+export const notificationSelector = (state) => state.notification.message;

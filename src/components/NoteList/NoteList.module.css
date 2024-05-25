@@ -1,14 +1,13 @@
-
-
-.item{
+.item {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stack items vertically on mobile */
 }
 
-.notecontent{
-    width: 60%;
+.notecontent {
+    width: 100%; /* Full width for better responsiveness on mobile */
 }
 
-.button{
-    height: fit-content;
+.button {
+    height: auto; /* Allow button height to adjust based on content */
+    /* Add any other necessary styles */
 }

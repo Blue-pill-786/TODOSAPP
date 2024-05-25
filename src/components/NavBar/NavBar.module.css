@@ -1,5 +1,25 @@
+/* NavBar.module.css */
 
-
-.navitem{
-    width:70px;
-}
+.navbar {
+    background-color: #f8f9fa; /* Change background color */
+  }
+  
+  .nav-link {
+    color: #212529; /* Change link color */
+  }
+  
+  /* Style for mobile devices */
+  @media (max-width: 768px) {
+    .navbar-collapse {
+      background-color: #f8f9fa; /* Change background color of collapsed menu */
+    }
+  
+    .nav-item {
+      padding: 8px 0; /* Adjust padding for mobile devices */
+    }
+  
+    .navbar-brand {
+      margin-right: auto; /* Push brand to the left on mobile */
+    }
+  }
+  

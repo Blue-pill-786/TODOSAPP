@@ -1,47 +1,48 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import {addTodo} from "../../redux/actions/todoActions";
-import {  addTodoAsync} from "../../redux/reducers/todoReducer";
-
-import styles from "./ToDoForm.module.css";
-import { notificationSelector, resetNotification } from "../../redux/reducers/notificationReducer";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodoAsync } from '../../redux/reducers/todoReducer';
+import styles from './ToDoForm.module.css';
+import { notificationSelector, resetNotification } from '../../redux/reducers/notificationReducer';
 
 function ToDoForm() {
-  const [todoText, setTodoText] = useState("");
+  const [todoText, setTodoText] = useState('');
   const dispatch = useDispatch();
-  const message = useSelector(notificationSelector)
-  
-  if(message){
-    setTimeout(()=>{
-      dispatch(resetNotification());
-    }, 3000);
-  }
+  const message = useSelector(notificationSelector);
 
-  const handleSubmit = (e) =>{
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        dispatch(resetNotification());
+      }, 3000);
+
+      // Cleanup the timeout to avoid memory leaks
+      return () => clearTimeout(timer);
+    }
+  }, [message, dispatch]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
     dispatch(addTodoAsync(todoText));
-    setTodoText("");
+    console.log(todoText)
+    setTodoText('');
   };
 
   return (
     <div className={styles.container}>
-      {
-        message && 
-        <div className="alert alert-success" role="alert">
+      {message && (
+        <div className='alert alert-success' role='alert'>
           {message}
         </div>
-      }
-     
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="form-control mb-3"
-        value={todoText}
-        onChange={(e) => setTodoText(e.target.value)}
-      />
-      <button className="btn btn-success float-end" type="submit">Create Todo</button>
-    </form>
+      )}
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          className={`form-control ${styles.formControl}`}
+          value={todoText}
+          onChange={(e) => setTodoText(e.target.value)}
+        />
+        <button className={styles.create}>Create</button>
+      </form>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { actions, getInitialState } from "../../redux/reducers/todoReducer";
-import { todoSelector } from "../../redux/reducers/todoReducer";
+import { getInitialState, todoSelector, toggle } from "../../redux/reducers/todoReducer";
 import styles from "./ToDoList.module.css";
 import { useEffect } from "react";
 
@@ -24,9 +23,7 @@ function ToDoList() {
             <button
               className="btn btn-warning"
               onClick={() => {
-                if (todo) {
-                  dispatch(actions.toggle(index));
-                }
+                dispatch(toggle(index));
               }}
             >
               Toggle

@@ -1,39 +1,44 @@
-
-
-li{
-    text-align: left;
+.container {
+    
+    /* border: 1px solid black;
+    border-radius: 5px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
 }
-
-
-.container{
-    margin: 56px !important;
-}
-
-.completed{
-    background-color: green;
-    padding: 0 6px;
-    height: fit-content;
-    margin: auto 0;
-    border-radius: 4px;
-    color: white;
-}
-
-.pending{
-    background-color: red;
-    padding: 0 6px;
-    height: fit-content;
-    margin: auto 0;
-    border-radius: 4px;
-    color: white;
-}
-
-.item{
-    width: 50%;
-    margin-top: 6px;
+  
+  .item {
     display: flex;
-    justify-content: space-between;
-}
+    flex-direction: row; /* Stack items vertically on mobile */
+    margin: 10px; /* Add margin between list items on mobile screens */
+  }
+  
+  .content {
+    width: 100%; /* Make content span full width on mobile screens */
+    padding: 5px; /* Add padding for better spacing on mobile screens */
 
-.content{
-    width: 25%;
-}
+  }
+  
+  .completed, .pending {
+    padding: 5px 10px; /* Adjust padding for better spacing on mobile */
+
+  }
+  
+  .btn {
+    width: 100px; /* Adjust button width for better fit on mobile screens */
+    margin-top: 5px; /* Add margin to separate button from other elements */
+  }
+
+  
+  
+  /* Media Query for Mobile Devices */
+  @media screen and (max-width: 600px) {
+    .completed, .pending {
+      padding: 3px 6px; /* Adjust padding for better spacing on smaller screens */
+    }
+  
+    .btn {
+      width: 80px; /* Adjust button width for better fit on smaller screens */
+      font-size: 14px; /* Decrease font size for better readability on smaller screens */
+    }
+  }
+  

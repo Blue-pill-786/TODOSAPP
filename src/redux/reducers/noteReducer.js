@@ -14,71 +14,60 @@ export const getInitialState = createAsyncThunk("notes/getInitialState", async (
   }
 });
 
-export const addnoteAsync = createAsyncThunk("notes/addnote", async (payload) => {
+export const addNoteAsync = createAsyncThunk("notes/addNote", async (payload) => {
   try {
     const response = await axios.post("https://todo-jfkg.onrender.com/api/notes/", {
       id: Math.random(),
       text: payload,
       createdOn: new Date().toDateString(),
-      
     });
-   
-    console.log("RESPONSE", response)
     return response.data;
   } catch (error) {
-   console.log("Notes error",error);
+    console.error("Notes error:", error);
+    throw error;
   }
 });
-export const deletenoteAsync = createAsyncThunk("notes/deleteNotes", async (noteId) => {
-    try {
-        const response = await axios.delete(`https://todo-jfkg.onrender.com/api/notes/${noteId}`);
-        return response.data;
-    } catch (error) {
-       console.log(error)
-    }
+
+export const deleteNoteAsync = createAsyncThunk("notes/deleteNote", async (noteId) => {
+  try {
+    await axios.delete(`https://todo-jfkg.onrender.com/api/notes/${noteId}`);
+    return noteId;
+  } catch (error) {
+    console.error("Notes error:", error);
+    throw error;
+  }
 });
 
 const noteSlice = createSlice({
-    name: "notes",
-    initialState: initialState,
-    reducers: {
-      // Add action
-      add: (state, action) => {
-        state.notes.push({
-          text: action.payload,
-          completed: false,
-        });
-      },
-      // Delete action
-      delete: (state, action) => {
-        const indexToDelete = action.payload;
-
-        console.log(action.payload)
-            // state.notes.filter(indexToDelete,1)
-
-        if (indexToDelete >= 0 && indexToDelete < state.notes.length) {
-          // Use Array.filter to create a new array without the note to be deleted
-          state.notes = state.notes.filter((note,index) => index !== indexToDelete);
-
-        }
-      },
+  name: "notes",
+  initialState,
+  reducers: {
+    add: (state, action) => {
+      state.notes.push({
+        id: Math.random(),
+        text: action.payload,
+        createdOn: new Date().toDateString(),
+      });
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(getInitialState.fulfilled, (state, action) => {
-          state.notes = [...action.payload];
-        })
-        .addCase(deletenoteAsync.fulfilled, (state, action) => {
-          state.notes = action.payload; // Update the state with the result
-        })
-        .addCase(addnoteAsync.fulfilled, (state, action) => {
-          state.notes.push(action.payload); // Push the newly added note into the array
-        });
+    remove: (state, action) => {
+      const noteId = action.payload;
+      state.notes = state.notes.filter(note => note.id !== noteId);
     },
-  });
-  
-  export const noteReducer = noteSlice.reducer;
-  export const actions = noteSlice.actions;
-  
-  export const noteSelector = (state) => state.noteReducer.notes;
-  
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getInitialState.fulfilled, (state, action) => {
+        state.notes = action.payload;
+      })
+      .addCase(addNoteAsync.fulfilled, (state, action) => {
+        state.notes.push(action.payload);
+      })
+      .addCase(deleteNoteAsync.fulfilled, (state, action) => {
+        state.notes = state.notes.filter(note => note.id !== action.payload);
+      });
+  },
+});
+
+export const noteReducer = noteSlice.reducer;
+export const { add, remove, addnoteAsync } = noteSlice.actions;
+export const noteSelector = (state) => state.notes.notes;
