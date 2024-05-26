@@ -1,25 +1,34 @@
 /* NavBar.module.css */
 
 .navbar {
-    background-color: #f8f9fa; /* Change background color */
+  background-color: #f0f0f0; /* Light grey */
+}
+
+.navbar-brand {
+  color: #333; /* Dark grey */
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.nav-item {
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: #333; /* Dark grey */
+}
+
+/* Media Query for Mobile Devices */
+@media screen and (max-width: 991px) {
+  .navbar-nav {
+    display: none; /* Hide navbar links by default */
+    padding: 10px;
   }
-  
-  .nav-link {
-    color: #212529; /* Change link color */
+
+  .nav-item {
+    margin-bottom: 10px;
   }
-  
-  /* Style for mobile devices */
-  @media (max-width: 768px) {
-    .navbar-collapse {
-      background-color: #f8f9fa; /* Change background color of collapsed menu */
-    }
-  
-    .nav-item {
-      padding: 8px 0; /* Adjust padding for mobile devices */
-    }
-  
-    .navbar-brand {
-      margin-right: auto; /* Push brand to the left on mobile */
-    }
-  }
-  
+}
