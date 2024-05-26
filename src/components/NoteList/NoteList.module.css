@@ -1,13 +1,40 @@
-.item {
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .noteList {
+    padding: 0;
+    list-style-type: none; /* Remove default bullet points */
+  }
+  
+  .noteItem {
     display: flex;
-    flex-direction: column; /* Stack items vertically on mobile */
-}
-
-.notecontent {
-    width: 100%; /* Full width for better responsiveness on mobile */
-}
-
-.button {
-    height: auto; /* Allow button height to adjust based on content */
-    /* Add any other necessary styles */
-}
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .noteText {
+    flex-grow: 1;
+  }
+  
+  .deleteButton {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .deleteButton:hover {
+    background-color: #7c0404; /* Darker red on hover */
+  }
+  

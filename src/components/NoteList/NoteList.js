@@ -1,33 +1,34 @@
-import React, { useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInitialState, addNoteAsync, deleteNoteAsync, noteSelector } from '../../redux/reducers/noteReducer';
+import { getInitialState, deleteNoteAsync, noteSelector } from '../../redux/reducers/noteReducer';
+import styles from './NoteList.module.css';
 
 const NoteList = () => {
   const dispatch = useDispatch();
   const notes = useSelector(noteSelector);
+ 
 
   useEffect(() => {
     dispatch(getInitialState());
   }, [dispatch]);
 
-  const handleAddNote = () => {
-    const noteText = prompt('Enter note text:');
-    if (noteText) {
-      dispatch(addNoteAsync(noteText));
-    }
-  };
-
   const handleDeleteNote = (noteId) => {
-    dispatch(deleteNoteAsync(noteId));
-  };
+    dispatch(deleteNoteAsync({ id: noteId })); 
+   };
 
   return (
-    <div>
-      <button onClick={handleAddNote}>Add Note</button>
-      <ul>
+    <div className={styles.container}>
+      <h2>Notes</h2>
+      <ul className={styles.noteList}>
         {notes.map(note => (
-          <li key={note.id}>
-            {note.text} <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
+          <li key={note._id} className={styles.noteItem}>
+            <div className={styles.noteText}>
+            {note.text} 
+
+            </div>
+            <div>
+            <button onClick={() => handleDeleteNote(note._id)} className={styles.deleteButton}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>

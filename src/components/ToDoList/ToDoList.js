@@ -13,15 +13,11 @@ function ToDoList() {
 
   const handleUpdate = (todo) => {
     const updatedTodo = { text: todo.text, completed: !todo.completed };
-    console.log('Updating Todo ID:', todo._id); // Debug logging
-    console.log('Update payload:', updatedTodo); // Debug logging
     dispatch(updateTodoAsync({ id: todo._id, updatedTodo }));
   };
 
   const handleDelete =(todo)=>{
-    console.log('Deleting Todo ID:', todo._id); // Debug logging
-    dispatch(deleteTodoAsync({ id: todo._id }));
-    
+    dispatch(deleteTodoAsync({ id:todo._id}));   
   }
 
   return (

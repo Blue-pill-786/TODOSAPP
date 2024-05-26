@@ -54,21 +54,20 @@ export const updateTodoAsync = createAsyncThunk(
   }
 );
 
-export const deleteTodoAsync =createAsyncThunk(
+export const deleteTodoAsync = createAsyncThunk(
   "todo/deleteTodo",
-  async (id) => {
+  async ({id}) => {
     try {
-      const response = await customAxios.delete(
+      await customAxios.delete(
         `https://todo-jfkg.onrender.com/api/todos/${id}`
-        );
-        return response.data;
-        } catch (error) {
-          console.error("Axios error:", error);
-          throw error;
-          }
-          }
-
-)
+      );
+      return {id};
+    } catch (error) {
+      console.error("Axios error:", error);
+      throw error;
+    }
+  }
+);
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -109,7 +108,9 @@ const todoSlice = createSlice({
         }
       })
       .addCase(deleteTodoAsync.fulfilled, (state, action) => {
-        state.todos = state.todos.filter(todo => todo._id !== action.payload._id);
+       
+        state.todos = state.todos.filter(todo => todo._id !== action.payload);
+        
       });
   }
 });
