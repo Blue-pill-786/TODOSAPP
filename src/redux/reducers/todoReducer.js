@@ -38,6 +38,38 @@ export const addTodoAsync = createAsyncThunk(
   }
 );
 
+export const updateTodoAsync = createAsyncThunk(
+  "todo/updateTodo",
+  async ({ id, updatedTodo }) => {
+    try {
+      const response = await customAxios.put(
+        `https://todo-jfkg.onrender.com/api/todos/${id}`,
+        updatedTodo
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Axios error:", error);
+      throw error;
+    }
+  }
+);
+
+export const deleteTodoAsync =createAsyncThunk(
+  "todo/deleteTodo",
+  async (id) => {
+    try {
+      const response = await customAxios.delete(
+        `https://todo-jfkg.onrender.com/api/todos/${id}`
+        );
+        return response.data;
+        } catch (error) {
+          console.error("Axios error:", error);
+          throw error;
+          }
+          }
+
+)
+
 const todoSlice = createSlice({
   name: 'todo',
   initialState,
@@ -69,6 +101,15 @@ const todoSlice = createSlice({
       })
       .addCase(addTodoAsync.fulfilled, (state, action) => {
         state.todos.push(action.payload);
+      })
+      .addCase(updateTodoAsync.fulfilled, (state, action) => {
+        const index = state.todos.findIndex(todo => todo._id === action.payload._id);
+        if (index !== -1) {
+          state.todos[index] = action.payload;
+        }
+      })
+      .addCase(deleteTodoAsync.fulfilled, (state, action) => {
+        state.todos = state.todos.filter(todo => todo._id !== action.payload._id);
       });
   }
 });

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getInitialState, todoSelector, toggle } from "../../redux/reducers/todoReducer";
+import { getInitialState, todoSelector, updateTodoAsync, deleteTodoAsync } from "../../redux/reducers/todoReducer";
 import styles from "./ToDoList.module.css";
 import { useEffect } from "react";
 
@@ -11,20 +11,38 @@ function ToDoList() {
     dispatch(getInitialState());
   }, [dispatch]);
 
+  const handleUpdate = (todo) => {
+    const updatedTodo = { text: todo.text, completed: !todo.completed };
+    console.log('Updating Todo ID:', todo._id); // Debug logging
+    console.log('Update payload:', updatedTodo); // Debug logging
+    dispatch(updateTodoAsync({ id: todo._id, updatedTodo }));
+  };
+
+  const handleDelete =(todo)=>{
+    console.log('Deleting Todo ID:', todo._id); // Debug logging
+    dispatch(deleteTodoAsync({ id: todo._id }));
+    
+  }
+
   return (
     <div className={styles.container}>
       <ul>
-        {todos.map((todo, index) => (
-          <li className={styles.item} key={index}>
+        {todos.map((todo) => (
+          <li className={styles.item} key={todo._id}>
             <span className={styles.content}>{todo?.text}</span>
             <span className={todo?.completed ? styles.completed : styles.pending}>
               {todo?.completed ? "Completed" : "Pending"}
             </span>
             <button
               className="btn btn-warning"
-              onClick={() => {
-                dispatch(toggle(index));
-              }}
+              onClick={() => handleDelete(todo)}
+            >
+              Delete
+            </button>
+
+            <button
+              className="btn btn-warning"
+              onClick={() => handleUpdate(todo)}
             >
               Toggle
             </button>

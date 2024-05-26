@@ -8,8 +8,7 @@ export const loggerMiddleware = (store)=>{
             console.log("[LOG]: "+action.type+ " "+ new Date().toString());
             // call next middleware in pipeline.
             next(action);
-            // log the modified state of app.
-            console.log(store.getState());
+           
         }
     }
 }
