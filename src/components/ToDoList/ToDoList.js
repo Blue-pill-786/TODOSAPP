@@ -30,14 +30,14 @@ function ToDoList() {
               {todo?.completed ? "Completed" : "Pending"}
             </span>
             <button
-              className="btn btn-warning"
+              className={styles.buttonDelete}
               onClick={() => handleDelete(todo)}
             >
               Delete
             </button>
 
             <button
-              className="btn btn-warning"
+              className={styles.buttonToggle}
               onClick={() => handleUpdate(todo)}
             >
               Toggle

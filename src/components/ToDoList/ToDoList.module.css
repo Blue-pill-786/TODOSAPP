@@ -1,31 +1,67 @@
 .container {
     
-    /* border: 1px solid black;
-    border-radius: 5px; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(241, 200, 200);
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .7);
+    margin: 10px;
     margin-top: 100px;
+   
 }
   
   .item {
     display: flex;
     flex-direction: row; /* Stack items vertically on mobile */
-    margin: 10px; /* Add margin between list items on mobile screens */
+    margin: 20px; /* Add margin between list items on mobile screens */
   }
   
   .content {
-    width: 100%; /* Make content span full width on mobile screens */
     padding: 5px; /* Add padding for better spacing on mobile screens */
-
+    
+    width: 100%;
   }
   
-  .completed, .pending {
-    padding: 5px 10px; /* Adjust padding for better spacing on mobile */
-
+  .completed {
+    background-color: #4CAF50; /* Green */
+    border-radius: 10px 10px 10px 25px;
+    padding: 10px;
+    margin: 10px;
+   
   }
   
-  .btn {
-    width: 100px; /* Adjust button width for better fit on mobile screens */
-    margin-top: 5px; /* Add margin to separate button from other elements */
+  .pending {
+    background-color: #ff4d07; /* Yellow */
+    border-radius: 10px 10px 10px 25px;
+    padding: 10px;
+    margin: 10px;
+  }
+  .pending:hover, .completed:hover{
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
+  }
+  
+  .buttonDelete {
+    background-color: #c00404;
+    color: rgb(238, 207, 207);
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .7);
+  }
+  .buttonDelete:hover{
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
+  }
+  
+  .buttonToggle {
+    background-color: #4caf50;
+    color: rgb(252, 251, 251);
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+   
+  }
+  .buttonToggle:hover{
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
   }
 
   
@@ -36,9 +72,19 @@
       padding: 3px 6px; /* Adjust padding for better spacing on smaller screens */
     }
   
-    .btn {
+    .buttonDelete {
       width: 80px; /* Adjust button width for better fit on smaller screens */
       font-size: 14px; /* Decrease font size for better readability on smaller screens */
+      box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
     }
+    .buttonToggle {
+      width: 80px; /* Adjust button width for better fit on smaller screens */
+      font-size: 14px; /* Decrease font size for better readability on smaller screens */
+      box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
+    }
+    .pending, .completed{
+      box-shadow: 10px 5px 5px rgba(0, 0, 0, .7);
+    }
+    
   }
   
